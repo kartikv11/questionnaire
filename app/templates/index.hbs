@@ -1,0 +1,15 @@
+{{#paper-content}}
+  {{#paper-list}}
+    {{#paper-subheader class="md-no-sticky"}}<h5>Select Questionnaire below:</h5>{{/paper-subheader}}
+    <ul>
+      {{#each model as |item|}}
+          {{#paper-item class="md-3-line"}}
+              <div class="clark-pointer md-list-item-text mdl-js-button mdl-js-ripple-effect" {{action "goToQuestionnaire" item }}>
+                <h5><li>{{item.about}}</li></h5>
+              </div>
+          {{/paper-item}}
+          {{paper-divider}}
+      {{/each}}
+    </ul>
+  {{/paper-list}}
+{{/paper-content}}

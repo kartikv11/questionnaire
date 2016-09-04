@@ -1,0 +1,54 @@
+<span>
+  <h4>{{ongoingQuestion.question}}</h4>
+  {{#if ongoingQuestion.required}}
+    <p style="color:red;"><i>*compulsory question</i></p>
+  {{/if}}
+</span>
+<br/><br/>
+{{#if (compare ongoingQuestion.type.id '1' operator="==")}}
+
+{{paper-input textarea=true block=true label="Enter Answer" required=ongoingQuestion.required maxlength=150
+  value=ongoingQuestion.answer onChange=(action (mut ongoingQuestion.answer))}}
+
+{{else if (compare ongoingQuestion.type.id '2' operator="==")}}
+
+  {{#each ongoingQuestion.options as |option|}}
+    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for={{option.id}}>
+      {{#if (compare currentQuestion.answer option.id operator="==")}}
+        <input type="radio" id={{option.id}} class="mdl-radio__button" name="options" checked>
+        <span class="mdl-radio__label">{{option.value}}</span>
+      {{else}}
+        <input type="radio" id={{option.id}} class="mdl-radio__button" name="options" {{action "radioChecked" option.id}}>
+        <span class="mdl-radio__label">{{option.value}}</span>
+      {{/if}}
+    </label>
+    <br/>
+  {{/each}}
+
+{{else if (compare ongoingQuestion.type.id '3' operator="==")}}
+
+  {{#each currentQuestion.options as |multi_option|}}
+    {{multi-option-component currentOption=multi_option answers=currentQuestion.answer}}
+  {{/each}}
+{{/if}}
+
+<br/><br/>
+
+{{#if (compare currentOngoingQuestionIndex '1' operator=">")}}
+  <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" {{action "prevQuestion"}}>
+    Previous
+  </button>
+{{/if}}
+{{#if (compare currentOngoingQuestionIndex currentQuestionnaire.questions.length operator="<")}}
+  <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" {{action "nextQuestion"}}>
+    Next
+  </button>
+{{/if}}
+{{#if (compare currentOngoingQuestionIndex currentQuestionnaire.questions.length operator="==")}}
+  <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" {{action "submit"}}>
+    Submit
+  </button>
+{{/if}}
+<!-- <span style="float:right;">
+  {{#paper-button raised=true warn=true onClick=(action "resetAnswers")}}Reset{{/paper-button}}
+</span> -->
