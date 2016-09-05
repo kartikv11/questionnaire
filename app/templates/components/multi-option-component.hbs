@@ -1,9 +1,0 @@
-<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for={{currentOption.id}}>
-  {{#if currentOption.checkedValue}}
-    <input type="checkbox" id={{currentOption.id}} class="mdl-checkbox__input" {{action "checkValue" currentOption}} checked>
-    <span class="mdl-checkbox__label">{{currentOption.value}}</span>
-  {{else}}
-    <input type="checkbox" id={{currentOption.id}} class="mdl-checkbox__input" {{action "checkValue" currentOption}}>
-    <span class="mdl-checkbox__label">{{currentOption.value}}</span>
-  {{/if}}
-</label>
